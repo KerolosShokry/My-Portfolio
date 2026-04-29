@@ -1,0 +1,313 @@
+/* ================== ROOT ================== */
+:root {
+    --primary: #00ff41;
+    --accent: #00d4ff;
+    --bg-dark: #05070a;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-dim: #b0b0b0;
+}
+
+/* ================== RESET ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+
+    /* تعويض navbar */
+    padding-top: 80px;
+}
+
+/* ================== BACKGROUND ================== */
+.bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(5,7,10,0.9));
+    z-index: -1;
+}
+
+/* ================== NAVBAR ================== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.logo span {
+    color: white;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav ul a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: lowercase;
+    transition: 0.3s;
+}
+
+nav ul a:hover {
+    color: var(--primary);
+}
+
+/* ================== MAIN ================== */
+main {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    padding: 20px;
+}
+
+/* ================== GLASS ================== */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    transition: 0.3s;
+}
+
+/* ================== TEXT ================== */
+h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-shadow:
+        0 0 20px rgba(255,255,255,0.3),
+        0 0 40px rgba(0,255,65,0.2);
+}
+
+h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin-bottom: 20px; /* 👈 قللناها */
+}
+
+/* ================== HERO ================== */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* 👈 بدل center */
+
+    padding-top: 20px;
+    min-height: auto; /* 👈 شيلنا الطول المبالغ فيه */
+}
+
+/* ================== SKILLS ================== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.skill-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.skill-item:hover {
+    background: rgba(0,255,65,0.2);
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,255,65,0.3);
+}
+
+/* ================== PROJECT ================== */
+.project-card {
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.project-info {
+    flex: 1;
+}
+
+.project-img img {
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+.project-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.project-btn:hover {
+    background: var(--primary);
+    color: black;
+}
+
+/* ================== SOCIAL ================== */
+.social-links {
+    display: flex;
+    justify-content: center; /* سنترة أفقية */
+    align-items: center;     /* سنترة رأسية */
+    gap: 20px;               /* مسافة معقولة بين الدوائر */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;             /* لضمان أنها تأخذ العرض الكامل فتتسنتر */
+}
+
+/* تنسيق الدوائر - مقاس متوسط */
+.social-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    border: 2px solid var(--primary); /* إطار أخضر رفيع وشيك */
+    
+    /* المقاس المتوسط الجديد */
+    width: 60px;  
+    height: 60px; 
+    font-size: 22px; /* حجم الأيقونة مناسب للمقاس الجديد */
+    
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background: rgba(255, 255, 255, 0.03); /* خلفية زجاجية خفيفة جداً */
+    transition: all 0.3s ease;
+}
+
+/* تأثير الـ Hover */
+.social-links a:hover {
+    background: var(--primary); 
+    color: #000;                
+    transform: translateY(-5px); /* تطلع لفوق حاجة بسيطة */
+    box-shadow: 0 0 15px var(--primary); /* توهج أخضر هادي */
+}
+
+#facebook:hover {
+    color: #0066ff;
+}
+
+#insta:hover {
+    color: #b31074;
+}
+
+#Linkedin:hover {
+    color: #0273f5;
+}
+
+#github:hover {
+    color: #000000;
+}
+
+/* ================== ASCII ================== */
+.ascii-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.ascii-art {
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    line-height: 1.2;
+    white-space: pre;
+    text-shadow: 0 0 10px rgba(0,255,65,0.7);
+}
+
+/* ================== MOBILE ================== */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+
+    .project-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .project-img img {
+        width: 100%;
+    }
+}
