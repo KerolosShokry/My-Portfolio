@@ -34,4 +34,30 @@ function switchTab(fileName) {
     if (titleEl) titleEl.textContent = fileMeta[fileName].title;
     if (langEl) langEl.textContent = fileMeta[fileName].lang;
   }
+
+  // Auto-close explorer drawer on mobile after selection
+  if (window.innerWidth <= 768) {
+    toggleExplorer(false);
+  }
+}
+
+function toggleExplorer(forceState) {
+  const explorer = document.getElementById('explorer-panel');
+  const overlay = document.getElementById('explorer-overlay');
+  const toggleBtn = document.getElementById('explorer-toggle-btn');
+  
+  if (!explorer) return;
+
+  const isOpen = explorer.classList.contains('open');
+  const shouldOpen = typeof forceState === 'boolean' ? forceState : !isOpen;
+
+  if (shouldOpen) {
+    explorer.classList.add('open');
+    if (overlay) overlay.classList.add('active');
+    if (toggleBtn) toggleBtn.classList.add('active');
+  } else {
+    explorer.classList.remove('open');
+    if (overlay) overlay.classList.remove('active');
+    if (toggleBtn) toggleBtn.classList.remove('active');
+  }
 }

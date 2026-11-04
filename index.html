@@ -13,9 +13,15 @@
 <body>
 
   <!-- Titlebar -->
-  <div class="titlebar">
+  <header class="titlebar">
     <div class="titlebar-left">
-      <i class="fa-brands fa-microsoft" style="color: #0078d4;"></i>
+      <svg class="vscode-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="VS Code">
+        <path d="M72.1 98.7L97.5 86.4C99.1 85.6 100 84 100 82.2V17.8C100 16 99.1 14.4 97.5 13.6L72.1 1.3C70.9 0.7 69.4 0.9 68.4 1.7L33.9 31.7L15.3 17.5C14.2 16.7 12.7 16.6 11.5 17.3L1.5 23.3C0.6 23.9 0 24.9 0 26V74C0 75.1 0.6 76.1 1.5 76.7L11.5 82.7C12.7 83.4 14.2 83.3 15.3 82.5L33.9 68.3L68.4 98.3C69.4 99.1 70.9 99.3 72.1 98.7Z" fill="#0065A9"/>
+        <path d="M72.1 98.7L97.5 86.4C99.1 85.6 100 84 100 82.2V17.8C100 16 99.1 14.4 97.5 13.6L72.1 1.3C70.9 0.7 69.4 0.9 68.4 1.7L33.9 31.7L72.1 1.3V98.7Z" fill="#007ACC"/>
+        <path d="M72.1 98.7L33.9 68.3L68.4 98.3C69.4 99.1 70.9 99.3 72.1 98.7Z" fill="#1F8AD2"/>
+        <path d="M15.3 82.5L72.1 38.8V1.3L33.9 31.7L15.3 17.5C14.2 16.7 12.7 16.6 11.5 17.3L1.5 23.3C0.6 23.9 0 24.9 0 26V32.8L15.3 44.5V82.5Z" fill="#0065A9"/>
+        <path d="M72.1 61.2L15.3 17.5V55.5L0 67.2V74C0 75.1 0.6 76.1 1.5 76.7L11.5 82.7C12.7 83.4 14.2 83.3 15.3 82.5L72.1 61.2Z" fill="#007ACC"/>
+      </svg>
       <div class="titlebar-menu">
         <span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span>
       </div>
@@ -26,76 +32,82 @@
       <span class="ctrl ctrl-max"></span>
       <span class="ctrl ctrl-close"></span>
     </div>
-  </div>
+  </header>
 
   <div class="layout-main">
-    <!-- Activity Bar -->
+    <!-- Activity Bar / Sidebar -->
     <aside class="sidebar">
-      <div>
-        <div class="sidebar-icon active" title="Explorer"><i class="fa-regular fa-copy"></i></div>
-        <div class="sidebar-icon" onclick="switchTab('about')" title="About"><i class="fa-regular fa-user"></i></div>
-        <div class="sidebar-icon" onclick="switchTab('skills')" title="Skills"><i class="fa-solid fa-microchip"></i></div>
-        <div class="sidebar-icon" onclick="switchTab('projects')" title="Projects"><i class="fa-solid fa-code-fork"></i></div>
-        <div class="sidebar-icon" onclick="switchTab('contact')" title="Contact"><i class="fa-regular fa-envelope"></i></div>
+      <div class="sidebar-top">
+        <button type="button" class="sidebar-icon active" id="explorer-toggle-btn" onclick="toggleExplorer()" title="Toggle Explorer (Files)"><i class="fa-regular fa-copy"></i></button>
+        <button type="button" class="sidebar-icon" onclick="switchTab('about')" title="About"><i class="fa-regular fa-user"></i></button>
+        <button type="button" class="sidebar-icon" onclick="switchTab('skills')" title="Skills"><i class="fa-solid fa-microchip"></i></button>
+        <button type="button" class="sidebar-icon" onclick="switchTab('projects')" title="Projects"><i class="fa-solid fa-code-fork"></i></button>
+        <button type="button" class="sidebar-icon" onclick="switchTab('contact')" title="Contact"><i class="fa-regular fa-envelope"></i></button>
       </div>
-      <div>
+      <div class="sidebar-bottom">
         <a href="https://github.com/KerolosShokry" target="_blank" rel="noopener noreferrer" class="sidebar-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
         <a href="https://www.linkedin.com/in/kerolos-shokry5" target="_blank" rel="noopener noreferrer" class="sidebar-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <div class="sidebar-icon" title="Settings"><i class="fa-solid fa-gear"></i></div>
+        <button type="button" class="sidebar-icon" title="Settings"><i class="fa-solid fa-gear"></i></button>
       </div>
     </aside>
 
-    <!-- Explorer -->
-    <div class="explorer">
-      <div class="explorer-header">Explorer</div>
+    <!-- Overlay for mobile drawer -->
+    <div class="explorer-overlay" id="explorer-overlay" onclick="toggleExplorer(false)"></div>
+
+    <!-- Explorer Panel -->
+    <nav class="explorer" id="explorer-panel">
+      <div class="explorer-header-row">
+        <span class="explorer-header">Explorer</span>
+        <button type="button" class="explorer-close-mobile" onclick="toggleExplorer(false)" aria-label="Close Explorer">&times;</button>
+      </div>
       <div class="explorer-folder">
-        <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i> PORTFOLIO
+        <i class="fa-solid fa-chevron-down folder-chevron"></i> PORTFOLIO
       </div>
       <div class="explorer-files">
         <div class="explorer-file active" data-file="home" onclick="switchTab('home')">
-          <i class="fa-brands fa-react" style="color: #61dafb;"></i> home.tsx
+          <i class="fa-brands fa-react" style="color: #61dafb;"></i> <span>home.tsx</span>
         </div>
         <div class="explorer-file" data-file="about" onclick="switchTab('about')">
-          <i class="fa-brands fa-html5" style="color: #e34f26;"></i> about.html
+          <i class="fa-brands fa-html5" style="color: #e34f26;"></i> <span>about.html</span>
         </div>
         <div class="explorer-file" data-file="skills" onclick="switchTab('skills')">
-          <i class="fa-brands fa-js" style="color: #f7df1e;"></i> skills.ts
+          <i class="fa-brands fa-js" style="color: #f7df1e;"></i> <span>skills.ts</span>
         </div>
         <div class="explorer-file" data-file="projects" onclick="switchTab('projects')">
-          <i class="fa-solid fa-boxes-stacked" style="color: #4ec9b0;"></i> projects.json
+          <i class="fa-solid fa-boxes-stacked" style="color: #4ec9b0;"></i> <span>projects.json</span>
         </div>
         <div class="explorer-file" data-file="contact" onclick="switchTab('contact')">
-          <i class="fa-solid fa-envelope" style="color: #f9826c;"></i> contact.css
+          <i class="fa-solid fa-envelope" style="color: #f9826c;"></i> <span>contact.css</span>
         </div>
       </div>
-    </div>
+    </nav>
 
     <!-- Workspace -->
     <div class="editor-container">
       <!-- Tabs Bar -->
       <div class="tabs-bar" id="tabs-bar">
         <div class="tab active" data-file="home" onclick="switchTab('home')">
-          <i class="fa-brands fa-react" style="color: #61dafb;"></i> home.tsx <span class="close-btn">&times;</span>
+          <i class="fa-brands fa-react" style="color: #61dafb;"></i> <span>home.tsx</span>
         </div>
         <div class="tab" data-file="about" onclick="switchTab('about')">
-          <i class="fa-brands fa-html5" style="color: #e34f26;"></i> about.html <span class="close-btn">&times;</span>
+          <i class="fa-brands fa-html5" style="color: #e34f26;"></i> <span>about.html</span>
         </div>
         <div class="tab" data-file="skills" onclick="switchTab('skills')">
-          <i class="fa-brands fa-js" style="color: #f7df1e;"></i> skills.ts <span class="close-btn">&times;</span>
+          <i class="fa-brands fa-js" style="color: #f7df1e;"></i> <span>skills.ts</span>
         </div>
         <div class="tab" data-file="projects" onclick="switchTab('projects')">
-          <i class="fa-solid fa-boxes-stacked" style="color: #4ec9b0;"></i> projects.json <span class="close-btn">&times;</span>
+          <i class="fa-solid fa-boxes-stacked" style="color: #4ec9b0;"></i> <span>projects.json</span>
         </div>
         <div class="tab" data-file="contact" onclick="switchTab('contact')">
-          <i class="fa-solid fa-envelope" style="color: #f9826c;"></i> contact.css <span class="close-btn">&times;</span>
+          <i class="fa-solid fa-envelope" style="color: #f9826c;"></i> <span>contact.css</span>
         </div>
       </div>
 
       <!-- Viewports -->
-      <div class="content-viewport">
+      <main class="content-viewport">
         
         <!-- PAGE 1: home.tsx -->
-        <div class="tab-pane active" id="pane-home">
+        <section class="tab-pane active" id="pane-home">
           <div class="hero-grid">
             <div class="code-window">
               <div class="line-numbers">
@@ -128,33 +140,33 @@
                 Crafting robust web experiences with a deep passion for system performance, antiquities digitization, open-source utilities, and lightweight game dev.
               </p>
               <div class="actions">
-                <button class="btn btn-primary" onclick="switchTab('projects')">
+                <button type="button" class="btn btn-primary" onclick="switchTab('projects')">
                   <i class="fa-solid fa-code"></i> Open Projects
                 </button>
-                <button class="btn btn-outline" onclick="switchTab('contact')">
+                <button type="button" class="btn btn-outline" onclick="switchTab('contact')">
                   <i class="fa-regular fa-envelope"></i> Contact Me
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- PAGE 2: about.html -->
-        <div class="tab-pane" id="pane-about">
+        <section class="tab-pane" id="pane-about">
           <h2 class="page-header"><span>&lt;section&gt;</span> About Me <span>&lt;/section&gt;</span></h2>
           <div class="contact-box">
-            <h3 style="color: #fff; font-size: 1.4rem;">Bridging Code, Performance & History</h3>
-            <p style="color: #c9d1d9; font-size: 1.1rem; line-height: 1.8;">
+            <h3 class="about-headline">Bridging Code, Performance & History</h3>
+            <p class="about-lead">
               As a Front-end Developer with a deep background in PC Hardware, I have a unique perspective on building efficient systems. I strive to build websites that are as powerful as the hardware they run on.
             </p>
-            <p style="color: #8b949e; font-size: 1rem; line-height: 1.7;">
+            <p class="about-subtext">
               Currently studying in the Archaeological Information Systems Department at the Faculty of Archaeology, Cairo University, combining modern digital web standards with the cultural heritage domain.
             </p>
           </div>
-        </div>
+        </section>
 
         <!-- PAGE 3: skills.ts -->
-        <div class="tab-pane" id="pane-skills">
+        <section class="tab-pane" id="pane-skills">
           <h2 class="page-header"><span>export const</span> TechnicalSkills <span>= [ ]</span></h2>
           <div class="skills-grid">
             <div class="skill-card">
@@ -200,16 +212,16 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- PAGE 4: projects.json -->
-        <div class="tab-pane" id="pane-projects">
+        <section class="tab-pane" id="pane-projects">
           <h2 class="page-header"><span>{</span> "featuredProjects": [ ] <span>}</span></h2>
           <div class="projects-grid">
             
             <!-- Heritage Hub -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Heritage Hub <span class="project-tag">Web App</span></h3>
                 <p>A platform that brings together famous historical sites in one place, helping users explore Egyptian heritage locations and tickets.</p>
               </div>
@@ -217,11 +229,11 @@
                 <a href="https://github.com/KerolosShokry/Heritage-Hub" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://heritage-hub-eg.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- UNCRACKED -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>UNCRACKED <span class="project-tag">Web App</span></h3>
                 <p>Web application that recommends legal, safe, and open-source alternatives to proprietary software packages.</p>
               </div>
@@ -229,11 +241,11 @@
                 <a href="https://github.com/KerolosShokry/UNCRACKED" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://uncracked.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- The Lost Archive -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>The Lost Archive <span class="project-tag">Archive</span></h3>
                 <p>The Lost Archive: Egypt's Ruined Records — uncovering, documenting, and digitizing historical remnants and heritage files.</p>
               </div>
@@ -241,11 +253,11 @@
                 <a href="https://github.com/KerolosShokry/The-Lost-Archive" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://the-lost-archive-eg.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- OVERDOSE STORE -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>OVERDOSE STORE <span class="project-tag">E-Commerce</span></h3>
                 <p>Dedicated computer hardware and gaming gear platform showcasing components, technical specs, and accessories.</p>
               </div>
@@ -253,11 +265,11 @@
                 <a href="https://github.com/KerolosShokry/OVERDOSE-STORE" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://overdose-hardware.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- Despresso Tech -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Despresso Tech <span class="project-tag">Diagnostics</span></h3>
                 <p>Professional PC building, hardware compatibility checks, and diagnostic portal designed for custom rigs and power users.</p>
               </div>
@@ -265,11 +277,11 @@
                 <a href="https://github.com/KerolosShokry/DespressoTech" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://despresso-tech.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- DESPRESSO STUDIO -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>DESPRESSO STUDIO <span class="project-tag">Game Studio</span></h3>
                 <p>Showcase hub for indie games, interactive experiments, and desktop entertainment creations.</p>
               </div>
@@ -277,11 +289,11 @@
                 <a href="https://github.com/KerolosShokry/DESPRSSO-STUDIO" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://despresso-games.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- Tablia -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Tablia. <span class="project-tag">Frontend UI</span></h3>
                 <p>Tablia 🍽️ - An authentic Egyptian fine dining experience web showcase crafted with responsive visual aesthetics.</p>
               </div>
@@ -289,11 +301,11 @@
                 <a href="https://github.com/KerolosShokry/TABLIA." target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://tablia-flame.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- Tic Tac Toe Game -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Tic Tac Toe Game <span class="project-tag">Game</span></h3>
                 <p>Interactive 2D game built using Godot Engine with customizable rules, turns, and real-time game status tracking.</p>
               </div>
@@ -301,11 +313,11 @@
                 <a href="https://github.com/KerolosShokry/Tic-Tac-Toe-Game" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://despresso-studio.itch.io/tic-tac-toe-game" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Play on Itch.io</a>
               </div>
-            </div>
+            </article>
 
             <!-- The Guessing Game -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>The Guessing Game <span class="project-tag">JavaScript</span></h3>
                 <p>A logic-based interactive game developed with JavaScript challenging players to find secret numbers with live feedback.</p>
               </div>
@@ -313,11 +325,11 @@
                 <a href="https://github.com/KerolosShokry/Guess-Game" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <a href="https://guess-game-woad.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website</a>
               </div>
-            </div>
+            </article>
 
             <!-- Tricky Bird -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Tricky Bird <span class="project-tag">Lua / Love2D</span></h3>
                 <p>Fast-paced 2D arcade bird navigation game implementing procedural obstacles, collision physics, and scoring logic.</p>
               </div>
@@ -325,11 +337,11 @@
                 <a href="https://github.com/KerolosShokry/Tricky-Bird" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <span class="project-link disabled"><i class="fa-solid fa-gamepad"></i> Source Available</span>
               </div>
-            </div>
+            </article>
 
             <!-- Pong Game -->
-            <div class="project-card">
-              <div>
+            <article class="project-card">
+              <div class="project-card-top">
                 <h3>Pong Game <span class="project-tag">Lua / Love2D</span></h3>
                 <p>Classic retro Pong arcade implementation recreating paddle mechanics, collision detection, and AI opponent behavior.</p>
               </div>
@@ -337,17 +349,17 @@
                 <a href="https://github.com/KerolosShokry/PongGame" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> GitHub</a>
                 <span class="project-link disabled"><i class="fa-solid fa-gamepad"></i> Source Available</span>
               </div>
-            </div>
+            </article>
 
           </div>
-        </div>
+        </section>
 
         <!-- PAGE 5: contact.css -->
-        <div class="tab-pane" id="pane-contact">
+        <section class="tab-pane" id="pane-contact">
           <h2 class="page-header"><span>.contact-channels</span> { connect: immediate; }</h2>
           <div class="contact-box">
             <div>
-              <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 0.4rem;">Let's get in touch!</h3>
+              <h3 class="about-headline">Let's get in touch!</h3>
               <p style="color: #8b949e; font-size: 1rem;">Feel free to reach out for collaborations, front-end projects, or hardware consultations.</p>
             </div>
 
@@ -398,22 +410,22 @@
               </a>
             </div>
           </div>
-        </div>
+        </section>
 
-      </div>
+      </main>
     </div>
   </div>
 
   <!-- Bottombar -->
   <footer class="bottombar">
     <div class="bottombar-left">
-      <div class="bottombar-item"><i class="fa-solid fa-code-branch"></i> main*</div>
+      <div class="bottombar-item"><i class="fa-solid fa-code-branch"></i> <span>main*</span></div>
       <div class="bottombar-item"><i class="fa-solid fa-circle-xmark"></i> 0 <i class="fa-solid fa-triangle-exclamation"></i> 0</div>
     </div>
     <div class="bottombar-right">
       <div class="bottombar-item" id="file-language">TypeScript React</div>
-      <div class="bottombar-item">UTF-8</div>
-      <div class="bottombar-item"><i class="fa-solid fa-check-double"></i> Prettier</div>
+      <div class="bottombar-item hide-on-mobile">UTF-8</div>
+      <div class="bottombar-item hide-on-mobile"><i class="fa-solid fa-check-double"></i> Prettier</div>
       <div class="bottombar-item">© 2026 Kerolos Shokry</div>
     </div>
   </footer>
